@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>事件冒泡、捕获例子</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../css/mui.min.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 v-cloak class="mui-title">事件冒泡、捕获例子</h1>
+		</header>
+		<div class="mui-content">
+			<div id='one' style="height: 300px; border: 1px solid #0080FC;">
+				<div id='two' style="height: 150px; border: 1px solid #0080FC;">
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/jquery-3.1.1.min.js"></script>
+	<script>
+		mui.init();
+		var one = document.getElementById('one');
+		var two = document.getElementById('two');
+		one.addEventListener('click', function() {
+			alert('one——false');
+		}, false);
+		two.addEventListener('click', function() {
+			alert('two——false');
+		}, false);
+		one.addEventListener('click', function() {
+			alert('one——true');
+		}, true);
+		two.addEventListener('click', function() {
+			alert('two——true');
+		}, true);
+
+		/*      总结：addEventListener的第三个参数（默认为false）true为事件捕获执行，false为事件冒泡执行。
+		 *      one执行的顺序与绑定事件的先后顺序有关。
+		 *      two执行事件会先执行one的捕获事件，再按照绑定事件的先后顺序执行完，最后执行one的冒泡事件。   
+		 */
+	</script>
+
+</html>
